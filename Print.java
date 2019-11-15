@@ -14,9 +14,18 @@ public class Print {
 		// Ordenar resultados
         Collections.sort(v);
         if (alrevez) {
-            Collections.reverse(v);
+			Collections.reverse(v);
         }		
 		// Imprimir resutlados
+		System.out.println("");
+        for (int x = 0; x < v.size(); x++) {
+            System.out.println( x+1 + " " + v.elementAt(x));
+        }
+    }
+	
+	void print(Vector<String> v) {
+		// Imprimir resutlados
+		System.out.println("");
         for (int x = 0; x < v.size(); x++) {
             System.out.println( x+1 + " " + v.elementAt(x));
         }

@@ -17,20 +17,16 @@ public class Main {
         // Restamos uno porque se empieza a imprimir desde 1
          sentences.remove(index - 1);
          return sentences;
-    }
+	}
 
-    static void printSentences(Vector<String> v) {
-        for (int x = 0; x < v.size(); x++) {
-            System.out.println( x+1 + " " + v.elementAt(x));
-        }
-    }
     public static void main(String[] args) {
         Vector<String> v = new Vector<String>();
 		Circular mycircular = new Circular();
+		Print myprint = new Print();
 		
 		// Leer input
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Do you want to remove stop words? Y/N ");
+        System.out.println("\nDo you want to remove stop words? Y/N ");
         String response = myObj.nextLine();
         boolean rem = false;
         String sentence;
@@ -50,16 +46,16 @@ public class Main {
         } while (!sentence.isEmpty());
 
         // Print all senteces
-        printSentences(v);
+		myprint.print(v);
 
         int responseDel = 1;
         while (responseDel != 0){
-            System.out.println("Do you want to remove a sentence? If yes write the index, if not write 0 ");
+            System.out.println("\nDo you want to remove a sentence? If yes write the index, if not write 0 ");
             responseDel = myObj.nextInt();
             myObj.nextLine();
             if (responseDel > 0) {
                 elimSentence(v, responseDel);
-                printSentences(v);
+				myprint.print(v);
             }
         }
         Vector<String> result = new Vector<String>();
@@ -71,27 +67,28 @@ public class Main {
 
         boolean backwards = false;
 
-        Print myprint = new Print();
         myprint.print(result, backwards);
 
-        System.out.println("Do you want to print the result backwards? Y/N ");
+        System.out.println("\nDo you want to print the result backwards? Y/N ");
         String backwardsResponse = myObj.nextLine();
         if (backwardsResponse.equals("Y")){
             // said yes
             backwards = true;
             myprint.print(result, backwards);
         }
-        int responseDelSalida = 1;
+		
+		int responseDelSalida = 1;
         while (responseDelSalida != 0){
-            System.out.println("Do you want to remove a sentence? If yes write the index, if not write 0 ");
+            System.out.println("\nDo you want to remove a sentence? If yes write the index, if not write 0 ");
             responseDelSalida = myObj.nextInt();
             myObj.nextLine();
             if (responseDelSalida > 0) {
                 elimSentence(result, responseDelSalida);
-                printSentences(result);
+				myprint.print(result);
             }
         } 
 		
+		myprint.print(result, backwards);
         myObj.close();
     }
 }
