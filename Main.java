@@ -80,6 +80,16 @@ public class Main {
             // said yes
             backwards = true;
             myprint.print(result, backwards);
+        }
+        int responseDelSalida = 1;
+        while (responseDelSalida != 0){
+            System.out.println("Do you want to remove a sentence? If yes write the index, if not write 0 ");
+            responseDelSalida = myObj.nextInt();
+            myObj.nextLine();
+            if (responseDelSalida > 0) {
+                elimSentence(result, responseDelSalida);
+                printSentences(result);
+            }
         } 
 		
         myObj.close();
