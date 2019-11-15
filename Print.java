@@ -10,9 +10,12 @@ import java.util.*;
 // Clase que se usa para imprimir resultados
 public class Print {
 
-    void print(Vector<String> v) {
+    void print(Vector<String> v, boolean alrevez) {
 		// Ordenar resultados
-        Collections.sort(v);		
+        Collections.sort(v);
+        if (alrevez) {
+            Collections.reverse(v);
+        }		
 		// Imprimir resutlados
         for (int x = 0; x < v.size(); x++) {
             System.out.println( x+1 + " " + v.elementAt(x));

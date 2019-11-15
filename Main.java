@@ -12,8 +12,20 @@ import java.util.*;
 
 // Clase Main que lee strings en input hasta recibir uno vacio
 public class Main {
+
+    static Vector<String> elimSentence(Vector<String> sentences, int index) {
+        // Restamos uno porque se empieza a imprimir desde 1
+         sentences.remove(index - 1);
+         return sentences;
+    }
+
+    static void printSentences(Vector<String> v) {
+        for (int x = 0; x < v.size(); x++) {
+            System.out.println( x+1 + " " + v.elementAt(x));
+        }
+    }
     public static void main(String[] args) {
-        Vector v = new Vector<String>();
+        Vector<String> v = new Vector<String>();
 		Circular mycircular = new Circular();
 		
 		// Leer input
@@ -21,29 +33,55 @@ public class Main {
         System.out.println("Do you want to remove stop words? Y/N ");
         String response = myObj.nextLine();
         boolean rem = false;
+        String sentence;
         if (response.equals("Y")){
             // said yes
-            System.out.println(response + " -----");
             rem = true;
         } 
-        System.out.println("Give me a sentence: ");
-        String sentence = myObj.nextLine();
-
-        v = mycircular.shift(sentence, v, rem);
-
         do {
-            System.out.println("Give me a sentence: ");
+            System.out.println("Give me sentences: ");
 			sentence = myObj.nextLine();
 
 			// Hacer shift ciruclar de input mientras no este vacio
             if (!sentence.isEmpty()) {
-                v = mycircular.shift(sentence, v, rem);
+                v.add(sentence);
 			}
 			
-		} while (!sentence.isEmpty());
+        } while (!sentence.isEmpty());
+
+        // Print all senteces
+        printSentences(v);
+
+        int responseDel = 1;
+        while (responseDel != 0){
+            System.out.println("Do you want to remove a sentence? If yes write the index, if not write 0 ");
+            responseDel = myObj.nextInt();
+            myObj.nextLine();
+            if (responseDel > 0) {
+                elimSentence(v, responseDel);
+                printSentences(v);
+            }
+        }
+        Vector<String> result = new Vector<String>();
+        
+        for (String elem : v) {
+            result = mycircular.shift(elem, result, rem);
+        }
+
+
+        boolean backwards = false;
+
+        Print myprint = new Print();
+        myprint.print(result, backwards);
+
+        System.out.println("Do you want to print the result backwards? Y/N ");
+        String backwardsResponse = myObj.nextLine();
+        if (backwardsResponse.equals("Y")){
+            // said yes
+            backwards = true;
+            myprint.print(result, backwards);
+        } 
 		
         myObj.close();
-        Print myprint = new Print();
-        myprint.print(v);
     }
 }
