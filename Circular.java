@@ -38,7 +38,7 @@ Vector<String> stopWords = new Vector<String>(Arrays.asList(stopWordsArr));
         String clouds = sentence.toLowerCase();
         String cloudsCopy = clouds;
         if (useStopWords) {
-            cloudsCopy = clean(sentence);
+            cloudsCopy = clean(clouds);
             clouds = cloudsCopy;
         }
 		
@@ -59,7 +59,7 @@ Vector<String> stopWords = new Vector<String>(Arrays.asList(stopWordsArr));
 
         for (String word : this.stopWords) {
             if (sentence.contains(" "+word+" ")) {
-                sentence = sentence.replace(word+" ", "");   
+                sentence = sentence.replace(" "+word+" ", " ");   
             }
         }
 
